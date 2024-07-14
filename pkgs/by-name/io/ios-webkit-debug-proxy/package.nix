@@ -2,6 +2,7 @@
   lib,
   stdenv,
   fetchFromGitHub,
+  fetchpatch,
 
   autoconf,
   automake,
@@ -36,6 +37,10 @@ stdenv.mkDerivation (finalAttrs: {
   patches = [
     # Examples compilation breaks with --disable-static, see https://github.com/google/ios-webkit-debug-proxy/issues/399
     ./0001-Don-t-compile-examples.patch
+    (fetchpatch {
+      url = "https://patch-diff.githubusercontent.com/raw/google/ios-webkit-debug-proxy/pull/418.patch";
+      hash = "sha256-/nHKioG3MhUlmI6Gb4OGo75JBeZlqf/JX7bn0+95w5Q=";
+    })
   ];
 
   nativeBuildInputs = [
