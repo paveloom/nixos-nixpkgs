@@ -1,6 +1,7 @@
 {
   stdenv,
   lib,
+  fetchpatch,
   fetchurl,
   replaceVars,
   openvpn,
@@ -33,6 +34,11 @@ stdenv.mkDerivation (finalAttrs: {
     (replaceVars ./fix-paths.patch {
       inherit kmod openvpn;
     })
+    (fetchpatch {
+      name = "Add support for `setenv`";
+      url = "https://gitlab.gnome.org/GNOME/NetworkManager-openvpn/-/merge_requests/80.patch";
+      hash = "sha256-MeyThkmrUrW6kIJTUZGoE3i3wEstwvdY3sIvDu7TiHI=";
+    })
   ];
 
   nativeBuildInputs = [
@@ -41,6 +47,8 @@ stdenv.mkDerivation (finalAttrs: {
     pkg-config
     file
     libxml2
+  ] ++ lib.optionals withGnome [
+    gtk4
   ];
 
   buildInputs =
