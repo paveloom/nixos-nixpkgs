@@ -28,20 +28,20 @@
 
 stdenv.mkDerivation rec {
   pname = "shortwave";
-  version = "4.0.1";
+  version = "4.0.1-unstable-2025-01-06";
 
   src = fetchFromGitLab {
     domain = "gitlab.gnome.org";
     owner = "World";
     repo = "Shortwave";
-    rev = version;
-    sha256 = "sha256-W1eOMyiooDesI13lOze/JcxzhSSxYOW6FOY85NkVyps=";
+    rev = "14fa8eca52c179fea8a01ca85f1dfb2aa30ad59a";
+    sha256 = "sha256-wvs9GHpYdwTU5JLEsgrLvCV8cbJIflHyXtyONC/LYQA=";
   };
 
   cargoDeps = rustPlatform.fetchCargoTarball {
     inherit src;
     name = "${pname}-${version}";
-    hash = "sha256-O5K5aNcWwUYkaJbGzTzS3FdNbEsQsdliyi0YShw+6PU=";
+    hash = "sha256-FBfnD/CuB1jp+oguihtgHokLes6p4+jgdsqJHvyN8+4=";
   };
 
   nativeBuildInputs = [
